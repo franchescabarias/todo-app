@@ -1,15 +1,7 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer app v-model="drawer" clipped>
-      <v-list>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title class="text-h6 dark--text">
-              TODOApp
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+
 
       <v-divider></v-divider>
 
