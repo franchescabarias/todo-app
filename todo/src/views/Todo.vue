@@ -26,11 +26,19 @@
               {{ task.title }}
             </v-list-item-title>
             </v-list-item-content>
+
+            <v-list-item-action>
+              <v-btn icon
+              @click.stop="deleteTask(task.id)"
+              >
+                <v-icon color="teal lighten-3">mdi-delete-sweep</v-icon>
+              </v-btn>
+            </v-list-item-action>
           </template>
+
         </v-list-item>
         <v-divider></v-divider>
       </div>
-
       </v-list-item-group>
     </v-list>
   </div>
@@ -65,6 +73,9 @@
         doneTask(id) {
           let task = this.tasks.filter(task => task.id === id)[0]
           task.done = !task.done
+        },
+        deleteTask(id) {
+          this.tasks = this.tasks.filter(task => task.id !== id)
         }
       }
     }
