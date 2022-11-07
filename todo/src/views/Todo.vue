@@ -1,6 +1,14 @@
 <template>
   <div class="home">
     <v-list class="pt-0">
+      <v-text-field
+            class="pa-3"
+            outlined
+            hide-details
+            clearable
+            label="Enter task"
+            append-icon="mdi-plus-box"
+          ></v-text-field>
 
       <v-list-item-group
         v-model="settings"
@@ -31,7 +39,7 @@
               <v-btn icon
               @click.stop="deleteTask(task.id)"
               >
-                <v-icon color="teal lighten-3">mdi-delete-sweep</v-icon>
+                <v-icon color="grey darken-2">mdi-delete-sweep</v-icon>
               </v-btn>
             </v-list-item-action>
           </template>
