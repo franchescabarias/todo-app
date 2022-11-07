@@ -1,8 +1,6 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer app v-model="drawer" clipped>
-
-
       <v-divider></v-divider>
 
       <v-list
@@ -25,15 +23,8 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app color="#fcb69f" dark clipped-left src="birds.jpg "
+    <v-app-bar app color="#fcb69f" dark flat clipped-left src="mountain.jpg"
     >
-      <template v-slot:img="{ props }">
-        <v-img
-          v-bind="props"
-          gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
-        ></v-img>
-      </template>
-
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-app-bar-title class="font-weight-bold">TODO</v-app-bar-title>
