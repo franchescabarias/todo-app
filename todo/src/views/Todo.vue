@@ -4,7 +4,7 @@
     <p class="font-weight-bold primary--text text-h5 text-left pl-3 pt-3">Today</p>
     </div>
 
-      
+      <!--text field-->
     <v-text-field
             v-model="newTaskTitle"
             @click:append="addTask"
@@ -18,8 +18,6 @@
             append-icon="mdi-plus-box"
           ></v-text-field>
 
-    
-    <!--text field-->
     <v-list 
     v-if="tasks.length"
       class="pt-0"
