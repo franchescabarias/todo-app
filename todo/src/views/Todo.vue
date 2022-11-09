@@ -1,26 +1,38 @@
 <template>
   <div class="home">
-    <v-list class="pt-0">
-      <v-text-field
+    <div class=" ma-3">
+    <p class="font-weight-bold primary--text text-h5 text-left pl-3 pt-3">Today</p>
+    </div>
+
+      
+    <v-text-field
             v-model="newTaskTitle"
             @click:append="addTask"
             @keyup.enter="addTask"
-            class="pa-3"
+            :class="{ 'error' : newTaskTitle.length > 500 }"
+            class="pa-3 blue--text"
             outlined
             hide-details
-            clearable
+            clearable 
             label="Enter task"
             append-icon="mdi-plus-box"
           ></v-text-field>
 
-      <v-list-item-group
+    
+    <!--text field-->
+    <v-list 
+    v-if="tasks.length"
+      class="pt-0"
+    >
+    <v-list-item-group
         v-model="settings"
         multiple
       >
       <div v-for="task in tasks" :key="task.id">
+        <!--highlight when done-->
         <v-list-item
           @click="doneTask(task.id)"
-          :class="{'teal lighten-5' : task.done }"
+          :class="{'blue lighten-5' : task.done }"
         >
           <template v-slot:default>
             <v-list-item-action>
@@ -31,6 +43,7 @@
             </v-list-item-action>
 
             <v-list-item-content>
+              <!--strikethrough line when done-->
               <v-list-item-title
               :class="{ 'text-decoration-line-through' : task.done }"
               >
@@ -38,20 +51,48 @@
             </v-list-item-title>
             </v-list-item-content>
 
+            <!--delete-->
             <v-list-item-action>
               <v-btn icon
               @click.stop="deleteTask(task.id)"
               >
-                <v-icon color="grey darken-2">mdi-delete-sweep</v-icon>
+                <v-icon 
+                color="blue darken-3 ">mdi-delete-sweep</v-icon>
+              </v-btn>
+              <v-btn icon
+              @click.stop="deleteTask(task.id)"
+              >
+              <!--edit-->
+              <v-btn icon
+              @click="editTask(task.id)"
+              >
+                <v-icon 
+                color="blue darken-3 ">mdi-pencil-circle</v-icon>
+              </v-btn>
               </v-btn>
             </v-list-item-action>
           </template>
-
         </v-list-item>
         <v-divider></v-divider>
       </div>
       </v-list-item-group>
     </v-list>
+      
+    
+    <div
+      v-else
+    >
+    <v-icon 
+    class="primary--text text-h2 d-flex justify-center align-self-center">
+      mdi-check-underline
+    </v-icon>
+    <div
+    class="primary--text text-h4 d-flex justify-center"
+    >
+    No tasks
+  </div>
+
+    </div>
   </div>
 </template>
 
@@ -62,23 +103,24 @@
     data() {
       return {
         newTaskTitle: '',
+        // Examples
         tasks: [
-          {
-            id: '1',
-            title: 'First task',
-            done: false
-          },
-          {
-            id: '2',
-            title: 'Second task',
-            done: false
-          },
-          {
-            id: '3',
-            title: 'Third task',
-            done: false
-          }
-        ]
+          // {
+          //   id: '1',
+          //   title: 'Finish assignment',
+          //   done: false
+          // },
+          // {
+          //   id: '2',
+          //   title: 'Watch Python tutorial',
+          //   done: false
+          // },
+          // {
+          //   id: '3',
+          //   title: 'Do Typescript Assessment',
+          //   done: false
+          // },
+        ],
       }
       }, 
       methods: {
@@ -97,6 +139,9 @@
         },
         deleteTask(id) {
           this.tasks = this.tasks.filter(task => task.id !== id)
+        },
+        error() {
+         return
         }
       }
     }
