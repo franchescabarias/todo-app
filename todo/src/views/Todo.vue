@@ -1,7 +1,12 @@
 <template>
   <div class="home">
-    <div class=" ma-3">
-    <p class="font-weight-bold primary--text text-h5 text-left pl-3 pt-3">Today</p>
+    <div class=" ml-2 mt-6 d-flex">
+      <v-icon 
+      class="text-h4"
+      >
+        mdi-brightness-5
+      </v-icon>
+      <div class="font-weight-bold dark--text text-h4 text-left pl-3">Today</div> 
     </div>
 
       <!--text field-->
@@ -10,7 +15,7 @@
             @click:append="addTask"
             @keyup.enter="addTask"
             :class="{ 'error' : newTaskTitle.length > 500 }"
-            class="pa-3 blue--text"
+            class="pa-3 blue--text pt-5"
             outlined
             hide-details
             clearable 
@@ -18,6 +23,7 @@
             append-icon="mdi-plus-box"
           ></v-text-field>
 
+    <!--task-->
     <v-list 
     v-if="tasks.length"
       class="pt-0"
@@ -36,7 +42,7 @@
             <v-list-item-action>
               <v-checkbox
                 :input-value="task.done"
-                color="primary"
+                color="dark"
               ></v-checkbox>
             </v-list-item-action>
 
@@ -55,18 +61,12 @@
               @click.stop="deleteTask(task.id)"
               >
                 <v-icon 
-                color="blue darken-3 ">mdi-delete-sweep</v-icon>
+                color="dark ">mdi-delete-sweep</v-icon>
               </v-btn>
               <v-btn icon
               @click.stop="deleteTask(task.id)"
               >
-              <!--edit-->
-              <v-btn icon
-              @click="editTask(task.id)"
-              >
-                <v-icon 
-                color="blue darken-3 ">mdi-pencil-circle</v-icon>
-              </v-btn>
+              
               </v-btn>
             </v-list-item-action>
           </template>
@@ -78,17 +78,17 @@
       
     
     <div
-      v-else
+    v-else
     >
-    <v-icon 
-    class="primary--text text-h2 d-flex justify-center align-self-center">
-      mdi-check-underline
-    </v-icon>
-    <div
-    class="primary--text text-h4 d-flex justify-center"
-    >
-    No tasks
-  </div>
+      <v-icon 
+      class="dark--text text-h1 d-flex justify-center align-self-center">
+        mdi-check-underline
+      </v-icon>
+      <div
+      class="dark--text text-h3 d-flex justify-center"
+      >
+      No tasks
+      </div>
 
     </div>
   </div>
