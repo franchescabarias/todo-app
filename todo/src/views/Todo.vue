@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+
+    <field-add-task/> 
+
     <div class=" ml-2 mt-6 d-flex">
       <v-icon 
       class="text-h4"
@@ -9,19 +12,6 @@
       <div class="font-weight-bold dark--text text-h4 text-left pl-3">Today</div> 
     </div>
 
-      <!--text field-->
-    <v-text-field
-            v-model="newTaskTitle"
-            @click:append="addTask"
-            @keyup.enter="addTask"
-            :class="{ 'error' : newTaskTitle.length > 500 }"
-            class="pa-3 blue--text pt-5"
-            outlined
-            hide-details
-            clearable 
-            label="Enter task"
-            append-icon="mdi-plus-box"
-          ></v-text-field>
 
     <!--task-->
     <v-list 
@@ -33,6 +23,7 @@
         multiple
       >
       <div v-for="task in $store.state.tasks" :key="task.id">
+        
         <!--highlight when done-->
         <v-list-item
           @click="$store.commit('doneTask', task.id)"
@@ -46,35 +37,60 @@
               ></v-checkbox>
             </v-list-item-action>
 
+            <!--strikethrough line when done-->
             <v-list-item-content>
-              <!--strikethrough line when done-->
               <v-list-item-title
               :class="{ 'text-decoration-line-through' : task.done }"
               >
               {{ task.title }}
-            </v-list-item-title>
+               </v-list-item-title>
             </v-list-item-content>
 
             <!--delete-->
+           
             <v-list-item-action>
-              <v-btn icon
+              <v-btn
+              v-if="$vuetify.breakpoint.mdAndUp" 
+              icon
               @click.stop="$store.commit('deleteTask', task.id)"
               >
                 <v-icon 
                 color="dark ">mdi-delete-sweep</v-icon>
               </v-btn>
-              <v-btn icon
-              @click.stop="deleteTask(task.id)"
+             
+            <v-menu
+              v-else-if="$vuetify.breakpoint.smAndDown"
+              offset-y>
+            <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              color="black"
+              dark
+              v-bind="attrs"
+              v-on="on"
+              icon
+            >
+            <v-icon 
+            color="dark ">mdi-dots-horizontal</v-icon>
+            </v-btn>
+            </template>
+            <v-list>
+              <v-list-item
+              @click.stop="$store.commit('deleteTask', task.id)"
               >
-              
-              </v-btn>
+              <v-list-item-icon><v-icon 
+                color="dark ">mdi-delete-sweep</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Delete</v-list-item-title>
+              </v-list-item>
+            </v-list>
+            </v-menu>
             </v-list-item-action>
           </template>
-        </v-list-item>
-        <v-divider></v-divider>
+          </v-list-item>
+          <v-divider></v-divider>
       </div>
-      </v-list-item-group>
-    </v-list>
+          </v-list-item-group>
+          </v-list>
       
     
     <div
@@ -98,21 +114,8 @@
 
   export default {
     name: 'HomeView',
-    data() {
-      return {
-        newTaskTitle: '',
-        // Examples
-        
+       components: {
+        'field-add-task': require('@/components/Todo/FieldAddTask.vue').default
+       }
       }
-      }, 
-      methods: {
-        addTask() {
-          this.$store.commit('addTask', this.newTaskTitle)
-          this.newTaskTitle = ''
-        },
-        error() {
-         return
-        }
-      }
-    }
 </script>
