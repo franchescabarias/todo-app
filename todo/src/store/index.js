@@ -60,6 +60,9 @@ export default new Vuex.Store({
         state.snackbar.show = true
         state.snackbar.text = text
       }, timeout);
+    },
+    hideSnackBar(state) {
+      state.snackbar.show = false
     }
   },
   // can fetch and process data before it is sent to a mutation
