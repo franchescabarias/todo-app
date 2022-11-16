@@ -25,7 +25,8 @@ export default new Vuex.Store({
       },
     ],
     snackbar: {
-      show: false
+      show: false,
+      text: ``
     }
   },
   // Vuex allows us to define "getters" in the store. 
@@ -49,19 +50,20 @@ export default new Vuex.Store({
     deleteTask(state, id) {
       state.tasks = state.tasks.filter(task => task.id !== id)
     },
-    showSnackbar(state) {
+    showSnackbar(state, text) {
       state.snackbar.show = true
+      state.snackbar.text = text
     }
   },
   // can fetch and process data before it is sent to a mutation
   actions: {
     addTask({ commit }, newTaskTitle) {
       commit('addTask', newTaskTitle)
-      commit('showSnackbar')
+      commit('showSnackbar', 'You have added a task!')
     },
     deleteTask({ commit }, id) {
       commit('deleteTask', id)
-      commit('showSnackbar')
+      commit('showSnackbar', 'You have deleted a task!')
     }
   },
 
