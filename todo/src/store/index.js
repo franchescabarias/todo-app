@@ -24,13 +24,15 @@ export default new Vuex.Store({
         done: false
       },
     ],
+    snackbar: {
+      show: false
+    }
   },
   // Vuex allows us to define "getters" in the store. 
   // You can think of them as computed properties for stores.
   getters: {
   },
-  //Vuex mutations are very similar to events: 
-  // each mutation has a string type and a handler.
+  // a method that mutates or updates the store property with the value provided
   mutations: {
     addTask(state, newTaskTitle) {
       let newTask = {
@@ -47,10 +49,16 @@ export default new Vuex.Store({
     deleteTask(state, id) {
       state.tasks = state.tasks.filter(task => task.id !== id)
     },
+    showSnackbar(state) {
+      state.snackbar.show = true
+    }
   },
-  //Instead of mutating the state, actions commit mutations.
-  // Actions can contain arbitrary asynchronous operations.
+  // can fetch and process data before it is sent to a mutation
   actions: {
+    addTask({ commit }, newTaskTitle) {
+      commit('addTask', newTaskTitle)
+      commit('showSnackbar')
+    }
   },
 
   //allows us to divide our store into modules. 
