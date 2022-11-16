@@ -55,6 +55,7 @@
     <!--routing-->
     <v-main>
       <router-view></router-view>
+      <snackbar/>
     </v-main>
   </v-app>
 </template>
@@ -65,10 +66,11 @@
       drawer: null, 
       items: [
           { title: 'Today', icon: 'mdi-brightness-5', to: '/'},
-          { title: 'Important', icon: 'mdi-bookmark-multiple-outline'},
-          { title: 'Completed', icon: 'mdi-checkbox-multiple-marked'},
           { title: 'About', icon: 'mdi-help-box', to: '/about'},
         ],
     }),
+    components: {
+      'snackbar': require('@/components/Global/Snackbar.vue').default
+    }
   }
 </script>
