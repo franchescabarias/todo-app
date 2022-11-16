@@ -21,7 +21,7 @@
 <script>
 export default {
     data: () => ({
-      text: `You've entered a task.`,
+      text: `You've added a task`,
     }),
 }
 </script>
