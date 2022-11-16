@@ -51,11 +51,8 @@
       </template>
       <v-list>
         <v-list-item
-        @click.stop="$store.commit('deleteTask', task.id)"
+        @click.stop="$store.dispatch('deleteTask', task.id)"
         >
-        <v-list-item-icon><v-icon 
-          color="dark ">mdi-delete-sweep</v-icon>
-        </v-list-item-icon>
         <v-list-item-title>Delete</v-list-item-title>
         </v-list-item>
       </v-list>
